@@ -1,0 +1,579 @@
+{
+  "generated_at": "2025-12-23T17:47:22Z",
+  "topk": 5,
+  "notes": [
+    "No tau share columns detected in index_csv; tau extremes will be skipped."
+  ],
+  "tau_extremes": {},
+  "operator_extremes": {
+    "neg": {
+      "highest": [
+        {
+          "author": "mahmutkisa",
+          "value": 0.6977228992944196
+        },
+        {
+          "author": "mehmetcoban",
+          "value": 0.4956703014753046
+        },
+        {
+          "author": "aakgul",
+          "value": 0.4474021808851828
+        },
+        {
+          "author": "ihsanaktas",
+          "value": 0.4422706863373957
+        },
+        {
+          "author": "muhammedesed",
+          "value": 0.4209429121231559
+        }
+      ],
+      "lowest": [
+        {
+          "author": "besimatalay",
+          "value": 0.1627645926876202
+        },
+        {
+          "author": "ismailhakkiizmirli",
+          "value": 0.172867222578576
+        },
+        {
+          "author": "omernasuhi",
+          "value": 0.1810455420141116
+        },
+        {
+          "author": "ahmetvarol",
+          "value": 0.1901860166773572
+        },
+        {
+          "author": "simsek",
+          "value": 0.1993264913406029
+        }
+      ]
+    },
+    "dat": {
+      "highest": [
+        {
+          "author": "mahmutkisa",
+          "value": 0.5920461834509301
+        },
+        {
+          "author": "ihsanaktas",
+          "value": 0.5838678640153945
+        },
+        {
+          "author": "mehmetcoban",
+          "value": 0.5384862091084028
+        },
+        {
+          "author": "demiryent",
+          "value": 0.5368826170622194
+        },
+        {
+          "author": "mehmetturk",
+          "value": 0.5293457344451572
+        }
+      ],
+      "lowest": [
+        {
+          "author": "mehmetcakir",
+          "value": 0.3082103912764593
+        },
+        {
+          "author": "abayindir",
+          "value": 0.3438101347017319
+        },
+        {
+          "author": "omernasuhi",
+          "value": 0.3446119307248236
+        },
+        {
+          "author": "besimatalay",
+          "value": 0.3492623476587556
+        },
+        {
+          "author": "edip",
+          "value": 0.368505452212957
+        }
+      ]
+    },
+    "acc": {
+      "highest": [
+        {
+          "author": "mahmutkisa",
+          "value": 0.4071520205259782
+        },
+        {
+          "author": "ihsanaktas",
+          "value": 0.3576010262989095
+        },
+        {
+          "author": "orhankuntman",
+          "value": 0.3473380372033354
+        },
+        {
+          "author": "hayrat",
+          "value": 0.3401218729955099
+        },
+        {
+          "author": "mehmetcoban",
+          "value": 0.3279345734445157
+        }
+      ],
+      "lowest": [
+        {
+          "author": "mehmetcakir",
+          "value": 0.1924310455420141
+        },
+        {
+          "author": "ilyasyorulmaz",
+          "value": 0.2132777421423989
+        },
+        {
+          "author": "besimatalay",
+          "value": 0.2211353431686978
+        },
+        {
+          "author": "aparliyan",
+          "value": 0.245830660679923
+        },
+        {
+          "author": "spiris",
+          "value": 0.2469531751122514
+        }
+      ]
+    },
+    "invoke": {
+      "highest": [
+        {
+          "author": "orhankuntman",
+          "value": 0.3340282232200128
+        },
+        {
+          "author": "mahmutkisa",
+          "value": 0.2384541372674791
+        },
+        {
+          "author": "mehmetturk",
+          "value": 0.2302758178319435
+        },
+        {
+          "author": "ihsanaktas",
+          "value": 0.1978832584990378
+        },
+        {
+          "author": "alifikriyavuz",
+          "value": 0.1977228992944195
+        }
+      ],
+      "lowest": [
+        {
+          "author": "mehmetcakir",
+          "value": 0.0500320718409236
+        },
+        {
+          "author": "edip",
+          "value": 0.0660679923027581
+        },
+        {
+          "author": "baltacioglu",
+          "value": 0.0711994868505452
+        },
+        {
+          "author": "elmaliliorj",
+          "value": 0.0726427196921103
+        },
+        {
+          "author": "erhanaktas",
+          "value": 0.0744066709429121
+        }
+      ]
+    },
+    "anchor": {
+      "highest": [
+        {
+          "author": "aakgul",
+          "value": 1.451250801796023
+        },
+        {
+          "author": "omernasuhi",
+          "value": 1.1457665169980755
+        },
+        {
+          "author": "mehmetokuyan",
+          "value": 1.1027902501603593
+        },
+        {
+          "author": "demiryent",
+          "value": 1.0795381654906993
+        },
+        {
+          "author": "ihsanaktas",
+          "value": 1.072482360487492
+        }
+      ],
+      "lowest": [
+        {
+          "author": "mehmetcakir",
+          "value": 0.4680885182809493
+        },
+        {
+          "author": "besimatalay",
+          "value": 0.4940667094291212
+        },
+        {
+          "author": "elmaliliorj",
+          "value": 0.4959910198845413
+        },
+        {
+          "author": "ilyasyorulmaz",
+          "value": 0.5925272610647851
+        },
+        {
+          "author": "edip",
+          "value": 0.6350224502886466
+        }
+      ]
+    },
+    "imp": {
+      "highest": [
+        {
+          "author": "mahmutkisa",
+          "value": 1.0452212957023732
+        },
+        {
+          "author": "orhankuntman",
+          "value": 0.9206221937139192
+        },
+        {
+          "author": "ihsanaktas",
+          "value": 0.835952533675433
+        },
+        {
+          "author": "syildirim",
+          "value": 0.813662604233483
+        },
+        {
+          "author": "aakgul",
+          "value": 0.7767799871712636
+        }
+      ],
+      "lowest": [
+        {
+          "author": "ilyasyorulmaz",
+          "value": 0.4206221937139192
+        },
+        {
+          "author": "edip",
+          "value": 0.4709749839640795
+        },
+        {
+          "author": "abulac",
+          "value": 0.5117062219371392
+        },
+        {
+          "author": "erhanaktas",
+          "value": 0.5194034637588197
+        },
+        {
+          "author": "mahmutozdemir",
+          "value": 0.5355997434252726
+        }
+      ]
+    },
+    "past": {
+      "highest": [
+        {
+          "author": "mahmutkisa",
+          "value": 0.9068313021167416
+        },
+        {
+          "author": "aakgul",
+          "value": 0.7844772289929441
+        },
+        {
+          "author": "mehmetcoban",
+          "value": 0.7103912764592688
+        },
+        {
+          "author": "ihsanaktas",
+          "value": 0.6879409878127004
+        },
+        {
+          "author": "orhankuntman",
+          "value": 0.6824887748556767
+        }
+      ],
+      "lowest": [
+        {
+          "author": "edip",
+          "value": 0.422867222578576
+        },
+        {
+          "author": "spiris",
+          "value": 0.4374599101988454
+        },
+        {
+          "author": "besimatalay",
+          "value": 0.4499679281590763
+        },
+        {
+          "author": "haydarozturkserkanyilmaz",
+          "value": 0.4525336754329698
+        },
+        {
+          "author": "ilyasyorulmaz",
+          "value": 0.459108402822322
+        }
+      ]
+    },
+    "evid": {
+      "highest": [
+        {
+          "author": "ihsanaktas",
+          "value": 0.3944836433611289
+        },
+        {
+          "author": "mahmutkisa",
+          "value": 0.3316228351507376
+        },
+        {
+          "author": "mahmutozdemir",
+          "value": 0.2788646568313021
+        },
+        {
+          "author": "omernasuhi",
+          "value": 0.2771007055805003
+        },
+        {
+          "author": "aakgul",
+          "value": 0.2334830019243104
+        }
+      ],
+      "lowest": [
+        {
+          "author": "golpinarli",
+          "value": 0.0862732520846696
+        },
+        {
+          "author": "haydarozturkserkanyilmaz",
+          "value": 0.0906029506093649
+        },
+        {
+          "author": "mehmetturk",
+          "value": 0.0930083386786401
+        },
+        {
+          "author": "bahaeddinsaglam",
+          "value": 0.0931686978832585
+        },
+        {
+          "author": "ismailhakkiizmirli",
+          "value": 0.0950930083386786
+        }
+      ]
+    },
+    "fut": {
+      "highest": [
+        {
+          "author": "mahmutkisa",
+          "value": 0.3502245028864656
+        },
+        {
+          "author": "aakgul",
+          "value": 0.1933932007697242
+        },
+        {
+          "author": "ismailhakkiizmirli",
+          "value": 0.173348300192431
+        },
+        {
+          "author": "muhammedesed",
+          "value": 0.1693393200769724
+        },
+        {
+          "author": "ahmettekin",
+          "value": 0.1690186016677357
+        }
+      ],
+      "lowest": [
+        {
+          "author": "edip",
+          "value": 0.054842847979474
+        },
+        {
+          "author": "mahmutozdemir",
+          "value": 0.0607761385503527
+        },
+        {
+          "author": "ynuri",
+          "value": 0.063662604233483
+        },
+        {
+          "author": "ismailyakit",
+          "value": 0.064624759461193
+        },
+        {
+          "author": "sates",
+          "value": 0.0665490699166132
+        }
+      ]
+    },
+    "prog": {
+      "highest": [
+        {
+          "author": "mahmutozdemir",
+          "value": 0.1451250801796023
+        },
+        {
+          "author": "mahmutkisa",
+          "value": 0.110166773572803
+        },
+        {
+          "author": "mehmetcoban",
+          "value": 0.0968569595894804
+        },
+        {
+          "author": "ahmettekin",
+          "value": 0.087395766516998
+        },
+        {
+          "author": "mehmetcakir",
+          "value": 0.0772931366260423
+        }
+      ],
+      "lowest": [
+        {
+          "author": "golpinarli",
+          "value": 0.0192431045542014
+        },
+        {
+          "author": "besimatalay",
+          "value": 0.0219692110327132
+        },
+        {
+          "author": "kadricelik",
+          "value": 0.0240538806927517
+        },
+        {
+          "author": "haydarozturkserkanyilmaz",
+          "value": 0.0256574727389352
+        },
+        {
+          "author": "diyanetislerieski",
+          "value": 0.0264592687620269
+        }
+      ]
+    },
+    "abst": {
+      "highest": [
+        {
+          "author": "mahmutkisa",
+          "value": 0.4581462475946119
+        },
+        {
+          "author": "ahmettekin",
+          "value": 0.4377806286080821
+        },
+        {
+          "author": "ihsanaktas",
+          "value": 0.3285760102629891
+        },
+        {
+          "author": "aakgul",
+          "value": 0.3277742142398974
+        },
+        {
+          "author": "mehmetcoban",
+          "value": 0.2610647851186658
+        }
+      ],
+      "lowest": [
+        {
+          "author": "elmaliliorj",
+          "value": 0.059974342527261
+        },
+        {
+          "author": "omernasuhi",
+          "value": 0.0710391276459268
+        },
+        {
+          "author": "ismailhakkiizmirli",
+          "value": 0.0907633098139833
+        },
+        {
+          "author": "hbasricantay",
+          "value": 0.1024695317511225
+        },
+        {
+          "author": "bahaeddinsaglam",
+          "value": 0.1149775497113534
+        }
+      ]
+    },
+    "barrier": {
+      "highest": [
+        {
+          "author": "mahmutkisa",
+          "value": 0.0529185375240538
+        },
+        {
+          "author": "baltacioglu",
+          "value": 0.0381654906991661
+        },
+        {
+          "author": "mehmetturk",
+          "value": 0.0357601026298909
+        },
+        {
+          "author": "aakgul",
+          "value": 0.0352790250160359
+        },
+        {
+          "author": "syildirim",
+          "value": 0.0349583066067992
+        }
+      ],
+      "lowest": [
+        {
+          "author": "besimatalay",
+          "value": 0.0067350865939704
+        },
+        {
+          "author": "omernasuhi",
+          "value": 0.0080179602309172
+        },
+        {
+          "author": "edip",
+          "value": 0.0104233483001924
+        },
+        {
+          "author": "haydarozturkserkanyilmaz",
+          "value": 0.0117062219371391
+        },
+        {
+          "author": "sates",
+          "value": 0.0118665811417575
+        }
+      ]
+    }
+  },
+  "detected_columns": {
+    "tau_share": {},
+    "operator_avg": {
+      "neg": "op_avg_neg",
+      "dat": "op_avg_dat",
+      "acc": "op_avg_acc",
+      "invoke": "op_avg_invoke",
+      "anchor": "op_avg_anchor",
+      "imp": "op_avg_imp",
+      "past": "op_avg_past",
+      "evid": "op_avg_evid",
+      "fut": "op_avg_fut",
+      "prog": "op_avg_prog",
+      "abst": "op_avg_abst",
+      "barrier": "op_avg_barrier"
+    }
+  }
+}
