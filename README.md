@@ -49,9 +49,16 @@ CSV with one semantic unit per row and a `text` column.
 
 python nk_ops_text_sweep.py --csv input.csv --text_col text --outdir results --msv_version 0.1.3
 
-### Output
+## Outputs
 
-MSV vectors, summaries, and tau classifications.
+Phase-1 produces:
+- MSV vectors (per segment)
+- τ (tau) classifications
+- Summary statistics and diagnostics
+
+See:
+- results/extremes_table.md (tau + operator extremes across authors)
+
 
 ## License
 
