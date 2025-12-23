@@ -58,6 +58,8 @@ Phase-1 produces:
 
 See:
 - results/extremes_table.md (tau + operator extremes across authors)
+- results/extreme_meals.json (machine-readable extremes)
+- results/*.csv (author index + operator averages)
 
 
 ## License
