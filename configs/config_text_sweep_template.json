@@ -1,0 +1,10 @@
+{
+  "msv_version": "0.1.3",
+  "text_col": "text",
+  "id_cols": [
+    "id",
+    "chapter"
+  ],
+  "min_len_chars": 15,
+  "notes": "Template config for book/article segment sweeps."
+}
