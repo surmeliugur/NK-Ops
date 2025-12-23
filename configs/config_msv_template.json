@@ -1,0 +1,10 @@
+{
+  "msv_version": "0.1.3",
+  "text_col": "text",
+  "id_cols": [
+    "sure",
+    "ayet"
+  ],
+  "language_hint": "tr",
+  "notes": "Template config. Scripts may expose these as CLI args; configs are for reproducible runs."
+}
