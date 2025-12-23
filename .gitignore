@@ -1,0 +1,18 @@
+# NK-Ops: keep generated outputs out of git
+/results/
+/scores/
+/data/
+/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+Thumbs.db
+
+# Optional: editor junk
+.vscode/
+.idea/
+
+# Optional: local env
+.venv/
+.env
