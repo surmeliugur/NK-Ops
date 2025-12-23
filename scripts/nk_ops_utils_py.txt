@@ -1,0 +1,255 @@
+# nk_ops_utils.py
+# NK-Ops Phase-1 — shared utilities (IO, logging, schema helpers)
+# v0.1 (utility module; keep deterministic)
+
+from __future__ import annotations
+
+import csv
+import json
+import os
+from dataclasses import dataclass
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
+
+# ---------------------------
+# Versioning
+# ---------------------------
+
+NK_OPS_UTILS_VERSION = "0.1.0"
+
+
+# ---------------------------
+# Small helpers
+# ---------------------------
+
+def iso_now_local() -> str:
+    """ISO timestamp in local time (no timezone conversion)."""
+    # We intentionally keep local clock semantics (reproducible enough for logs).
+    return datetime.now().replace(microsecond=0).isoformat()
+
+
+def ensure_dir(p: str | Path) -> Path:
+    pp = Path(p)
+    pp.mkdir(parents=True, exist_ok=True)
+    return pp
+
+
+def as_int(x: Any, default: int = 0) -> int:
+    try:
+        return int(x)
+    except Exception:
+        return default
+
+
+def as_float(x: Any, default: float = 0.0) -> float:
+    try:
+        return float(x)
+    except Exception:
+        return default
+
+
+# ---------------------------
+# CSV / JSON IO
+# ---------------------------
+
+def detect_sep(path: str | Path, sample_bytes: int = 64_000) -> str:
+    """
+    Try to detect separator using csv.Sniffer.
+    Falls back to comma if detection fails.
+    """
+    p = Path(path)
+    raw = p.read_bytes()[:sample_bytes]
+    # decode permissively
+    text = raw.decode("utf-8", errors="replace")
+    try:
+        dialect = csv.Sniffer().sniff(text, delimiters=[",", "\t", ";", "|"])
+        return dialect.delimiter
+    except Exception:
+        return ","
+
+
+def read_csv_rows(
+    path: str | Path,
+    sep: Optional[str] = None,
+    encoding: str = "utf-8",
+) -> Tuple[List[Dict[str, str]], str, List[str]]:
+    """
+    Read CSV into list-of-dicts (all values as strings).
+    Returns: (rows, sep_used, fieldnames)
+    """
+    p = Path(path)
+    sep_used = sep or detect_sep(p)
+    with p.open("r", encoding=encoding, errors="replace", newline="") as f:
+        reader = csv.DictReader(f, delimiter=sep_used)
+        rows: List[Dict[str, str]] = []
+        for r in reader:
+            if r is None:
+                continue
+            rows.append({k: (v if v is not None else "") for k, v in r.items()})
+        fieldnames = list(reader.fieldnames or [])
+    return rows, sep_used, fieldnames
+
+
+def write_csv(path: str | Path, rows: Sequence[Dict[str, Any]], fieldnames: Sequence[str]) -> None:
+    p = Path(path)
+    ensure_dir(p.parent)
+    with p.open("w", encoding="utf-8", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=list(fieldnames))
+        w.writeheader()
+        for r in rows:
+            w.writerow({k: r.get(k, "") for k in fieldnames})
+
+
+def write_json(path: str | Path, obj: Any) -> None:
+    p = Path(path)
+    ensure_dir(p.parent)
+    with p.open("w", encoding="utf-8") as f:
+        json.dump(obj, f, ensure_ascii=False, indent=2)
+
+
+def write_jsonl(path: str | Path, rows: Iterable[Dict[str, Any]]) -> None:
+    p = Path(path)
+    ensure_dir(p.parent)
+    with p.open("w", encoding="utf-8") as f:
+        for r in rows:
+            f.write(json.dumps(r, ensure_ascii=False) + "\n")
+
+
+# ---------------------------
+# Schema helpers for Phase-1 outputs
+# ---------------------------
+
+TAU_ORDER = ["NOISE", "LOW_OPS", "A", "C", "AC", "AB", "BC", "ABC"]
+
+OP_KEYS = [
+    "neg", "dat", "acc", "invoke", "anchor",
+    "past", "evid", "fut", "prog",
+    "abst", "imp", "barrier",
+]
+
+
+def count_tau(rows: Sequence[Dict[str, Any]], tau_key: str = "tau") -> Dict[str, int]:
+    counts: Dict[str, int] = {}
+    for r in rows:
+        t = str(r.get(tau_key, "")).strip() or "NOISE"
+        counts[t] = counts.get(t, 0) + 1
+    # keep deterministic ordering downstream
+    ordered: Dict[str, int] = {}
+    for k in TAU_ORDER:
+        if k in counts:
+            ordered[k] = counts[k]
+    for k in sorted(counts.keys()):
+        if k not in ordered:
+            ordered[k] = counts[k]
+    return ordered
+
+
+def shares_from_counts(counts: Dict[str, int], total: int) -> Dict[str, float]:
+    if total <= 0:
+        return {k: 0.0 for k in counts}
+    return {k: counts[k] / total for k in counts}
+
+
+def sum_ops(rows: Sequence[Dict[str, Any]], op_keys: Sequence[str] = OP_KEYS) -> Dict[str, int]:
+    totals = {k: 0 for k in op_keys}
+    for r in rows:
+        for k in op_keys:
+            totals[k] += as_int(r.get(k, 0), 0)
+    return totals
+
+
+def avg_ops(totals: Dict[str, int], n: int) -> Dict[str, float]:
+    if n <= 0:
+        return {k: 0.0 for k in totals}
+    return {k: totals[k] / n for k in totals}
+
+
+def top_k_counts(items: Iterable[str], k: int = 10) -> List[Tuple[str, int]]:
+    m: Dict[str, int] = {}
+    for x in items:
+        if not x:
+            continue
+        m[x] = m.get(x, 0) + 1
+    return sorted(m.items(), key=lambda kv: (-kv[1], kv[0]))[:k]
+
+
+def build_summary(
+    rows: Sequence[Dict[str, Any]],
+    *,
+    source_file: Optional[str] = None,
+    msv_version: Optional[str] = None,
+    tau_key: str = "tau",
+    noise_reason_key: str = "noise_reason",
+    op_keys: Sequence[str] = OP_KEYS,
+    extra: Optional[Dict[str, Any]] = None,
+) -> Dict[str, Any]:
+    """
+    Generic Phase-1 summary schema. Works for author sweeps and non-Qur'an text sweeps.
+    """
+    n = len(rows)
+    tau_counts = count_tau(rows, tau_key=tau_key)
+    tau_shares = shares_from_counts(tau_counts, n)
+
+    noise_reasons = top_k_counts((str(r.get(noise_reason_key, "")).strip() for r in rows), k=10)
+    # Convert to list-of-lists to be JSON-stable (avoid tuple vs list differences)
+    noise_reasons_ll = [[a, b] for a, b in noise_reasons]
+
+    op_totals = sum_ops(rows, op_keys=op_keys)
+    op_avg = avg_ops(op_totals, n)
+
+    summary: Dict[str, Any] = {
+        "rows": n,
+        "msv_version": msv_version,
+        "source_file": source_file,
+        "tau_counts": tau_counts,
+        "tau_shares": tau_shares,
+        "top_noise_reasons": noise_reasons_ll,
+        "operator_totals": op_totals,
+        "operator_avg_per_row": op_avg,
+        "generated_at": iso_now_local(),
+        "nk_ops_utils_version": NK_OPS_UTILS_VERSION,
+    }
+    if extra:
+        summary.update(extra)
+    return summary
+
+
+# ---------------------------
+# Fieldname utilities
+# ---------------------------
+
+def pick_existing_col(fieldnames: Sequence[str], candidates: Sequence[str]) -> Optional[str]:
+    fn = set(fieldnames)
+    for c in candidates:
+        if c in fn:
+            return c
+    return None
+
+
+def require_cols(fieldnames: Sequence[str], required: Sequence[str]) -> None:
+    missing = [c for c in required if c not in set(fieldnames)]
+    if missing:
+        raise RuntimeError(f"Missing required columns: {missing}. Available: {list(fieldnames)[:60]}")
+
+
+# ---------------------------
+# Convenience: safe filename
+# ---------------------------
+
+def slugify_ascii(s: str) -> str:
+    """
+    Simple ASCII slugifier (no Turkish chars) — aligns with your filename convention.
+    """
+    import re
+    s = s.strip().lower()
+    # Replace Turkish chars and common diacritics crudely
+    repl = str.maketrans({
+        "ç":"c","ğ":"g","ı":"i","ö":"o","ş":"s","ü":"u",
+        "â":"a","î":"i","û":"u",
+        "’":"", "'":"",
+    })
+    s = s.translate(repl)
+    s = re.sub(r"[^a-z0-9]+", "_", s)
+    s = re.sub(r"_+", "_", s).strip("_")
+    return s or "untitled"
