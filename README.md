@@ -1,67 +1,76 @@
-# NK-Ops
-NK-Ops Phase-1: Language-Independent Operator Physics for Text
+# NK-Ops — Operator-Based Meaning Dynamics
 
-## Overview
+NK-Ops is a research repository that studies meaning not as tokens or embeddings,
+but as interacting linguistic operators forming a measurable semantic field.
 
-NK-Ops is an experimental framework for detecting, quantifying, and comparing semantic operators in natural language texts, independent of any specific language model or embedding system.
+This repository is part of the broader Token-to-Marble / Neurocosmology (NK) framework.
 
-Instead of treating language as token sequences, NK-Ops models texts as the interaction of operators (negation, direction, anchoring, invocation, etc.) acting on a semantic field.
+------------------------------------------------------------
 
-The framework is designed to be:
+Repository Structure
 
-- Language-independent at the operator level  
-- Deterministic and rule-based  
-- Empirically testable across heterogeneous corpora  
+The project is organized into explicit research phases:
 
-This repository documents **Phase-1** of NK-Ops: operator detection, aggregation, and classification.
+NK-Ops/
+├── Phase-1/
+│   ├── configs/
+│   ├── data/
+│   ├── docs/
+│   ├── results/
+│   ├── scripts/
+│   └── README.md
+│
+├── Phase-2/
+│   ├── docs/
+│   ├── results/
+│   └── scripts/
+│
+└── README.md   (this file)
 
-## Core Idea
+------------------------------------------------------------
 
-Natural language meaning is not carried only by words, but by **operators** that shape intention, direction, certainty, and force.
+Phase Overview
 
-NK-Ops assumes that:
+Phase-1 — Operator Extraction & Baselines
 
-- Meaning emerges from operator configurations  
-- Different texts can be compared by their operator signatures  
-- Operator distributions are more stable than surface vocabulary  
+Focus:
+- Operator identification
+- Segment-level operator statistics
+- MSV vectors and tau classes
+- Baseline distributions
 
-## Operator Set (Phase-1)
+See: Phase-1/README.md
 
-Phase-1 focuses on a minimal but expressive operator basis:
+------------------------------------------------------------
 
-NEG, DAT/ACC, ANCHOR, INVOKE, IMP, PAST/FUT/PROG, EVID, ABST, BARRIER
+Phase-2 — Operator Interaction Graphs
 
-Operators are detected using explicit linguistic markers, not embeddings.
+Focus:
+- Operator co-occurrence graphs
+- Normalized interaction energy (NPMI)
+- Ablation studies (CASE.DAT, VOICE.PASS, CASE.ABL)
+- Author-level invariance analysis
 
-## Tau Classification
+See: Phase-2/docs/
 
-A, C, AC, LOW_OPS, NOISE
+------------------------------------------------------------
 
-## Quick Start
+Key Idea
 
-NK-Ops is a measurement framework, not a black-box model.
+Meaning emerges from operator interactions, not from surface word frequencies.
+By removing dominant operators and observing structural collapse or stability,
+the system reveals semantic load-bearing operators.
 
-### Input
+------------------------------------------------------------
 
-CSV with one semantic unit per row and a `text` column.
+Project Status
 
-### Run
+Phase-1: Completed
+Phase-2: Active (invariance and ablation analysis ongoing)
 
-python nk_ops_text_sweep.py --csv input.csv --text_col text --outdir results --msv_version 0.1.3
+------------------------------------------------------------
 
-## Outputs
+Citation
 
-Phase-1 produces:
-- MSV vectors (per segment)
-- τ (tau) classifications
-- Summary statistics and diagnostics
-
-See:
-- results/extremes_table.md (tau + operator extremes across authors)
-- results/extreme_meals.json (machine-readable extremes)
-- results/*.csv (author index + operator averages)
-
-
-## License
-
-MIT License
+If you use this work, please refer to:
+Phase-1/docs/CITATION.md
