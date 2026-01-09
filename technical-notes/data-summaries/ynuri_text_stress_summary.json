@@ -1,0 +1,10 @@
+{
+  "author": "ynuri",
+  "ayets": 6236,
+  "stress_levels": {
+    "0.2": { "divergent": 292,  "ratio": 0.0468 },
+    "0.5": { "divergent": 701,  "ratio": 0.1124 },
+    "0.8": { "divergent": 2588, "ratio": 0.4149 }
+  },
+  "notes": "AB vs ABC ayet-level divergence under contextual stress"
+}
